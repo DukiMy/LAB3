@@ -10,7 +10,7 @@ mvn clean verify
 ## Testresultat med coverage
 Problem med github workern, testresultatet som länkats är gammalt. Se ```.\target\site\jacoco\index.html ``` för aktuellt resultat.
 
-~~[https://dukimy.github.io/LAB2/](https://dukimy.github.io/LAB2)~~
+~~[https://dukimy.github.io/LAB3/](https://dukimy.github.io/LAB3)~~
 
 Uppdatering: Min lokala maskin kör testerna i en annan ordning än github actions, detta verkar bero på att junit kör testerna i en annan ordning på Linux än på Windows.
 
@@ -24,7 +24,7 @@ Får ni problem med testerna, kör dem i denna ordning.
 ```
 Folder PATH listing for volume Local Disk
 Volume serial number is 803D-0C49
-LAB2
+LAB3
 │   .classpath
 │   .project
 │   pom.xml
@@ -50,7 +50,7 @@ LAB2
 ├───src
 │   ├───main
 │   │   └───java
-│   │       └───lab2
+│   │       └───lab3
 │   │               Car.java
 │   │               ConditionallyMovableVehicle.java
 │   │               GameObject.java
@@ -69,7 +69,7 @@ LAB2
 │   │
 │   └───test
 │       └───java
-│           └───lab2
+│           └───lab3
 │                   GarageTests.java
 │                   LoadableVehicleTests.java
 │                   TippableVehiclesTest.java
@@ -77,10 +77,10 @@ LAB2
 │
 └───target
     │   jacoco.exec
-    │   LAB2-1.0-SNAPSHOT.jar
+    │   LAB3-1.0-SNAPSHOT.jar
     │
     ├───classes
-    │   └───lab2
+    │   └───lab3
     │           Car.class
     │           ConditionallyMovableVehicle.class
     │           GameObject.class
@@ -144,7 +144,7 @@ LAB2
     │       │       source.gif
     │       │       up.gif
     │       │
-    │       └───lab2
+    │       └───lab3
     │               ConditionallyMovableVehicle.html
     │               ConditionallyMovableVehicle.java.html
     │               GameObject.html
@@ -165,17 +165,17 @@ LAB2
     │               VolvoFH16.java.html
     │
     ├───surefire-reports
-    │       lab2.GarageTests.txt
-    │       lab2.LoadableVehicleTests.txt
-    │       lab2.TippableVehiclesTest.txt
-    │       lab2.VehicleTest.txt
-    │       TEST-lab2.GarageTests.xml
-    │       TEST-lab2.LoadableVehicleTests.xml
-    │       TEST-lab2.TippableVehiclesTest.xml
-    │       TEST-lab2.VehicleTest.xml
+    │       lab3.GarageTests.txt
+    │       lab3.LoadableVehicleTests.txt
+    │       lab3.TippableVehiclesTest.txt
+    │       lab3.VehicleTest.txt
+    │       TEST-lab3.GarageTests.xml
+    │       TEST-lab3.LoadableVehicleTests.xml
+    │       TEST-lab3.TippableVehiclesTest.xml
+    │       TEST-lab3.VehicleTest.xml
     │
     └───test-classes
-        └───lab2
+        └───lab3
                 GarageTests.class
                 LoadableVehicleTests.class
                 TippableVehiclesTest.class
