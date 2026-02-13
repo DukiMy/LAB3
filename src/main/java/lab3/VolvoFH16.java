@@ -7,6 +7,9 @@ package lab3;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+
+import lab3.interfaces.RampOperated;
+
 import static java.awt.Color.YELLOW;
 import static java.lang.System.out;
 

@@ -4,6 +4,7 @@
  */
 
 package lab3;
+
 import static java.awt.Color.BLACK;
 
 public final class Volvo240 extends Vehicle implements Car{

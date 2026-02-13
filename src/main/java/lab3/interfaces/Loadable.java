@@ -5,9 +5,9 @@
  *  Gränssnittet avgränsar beteenden hos objekt som kan lasta in andra objekt.
  */
 
-package lab3;
+package lab3.interfaces;
 
-interface Loadable {
+public interface Loadable {
   void load();
   void unLoad();
   void printLoad();

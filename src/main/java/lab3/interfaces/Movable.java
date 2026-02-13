@@ -3,7 +3,7 @@
  *  Kontakt: gusmizdu@student.gu.se
  */
 
-package lab3;
+package lab3.interfaces;
 
 public interface Movable {
   public abstract void move();

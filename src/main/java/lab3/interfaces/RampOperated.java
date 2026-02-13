@@ -6,9 +6,9 @@
  *  rampar.
  */
 
-package lab3;
+package lab3.interfaces;
 
-interface RampOperated extends Loadable {
+public interface RampOperated extends Loadable {
   void lowerRamp();
   void raiseRamp();
   boolean isRampLowered();

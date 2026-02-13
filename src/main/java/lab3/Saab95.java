@@ -6,6 +6,8 @@
 package lab3;
 import static java.awt.Color.RED;
 
+import lab3.interfaces.TurboChargable;
+
 public final class Saab95 extends Vehicle implements Car, TurboChargable{
 
 	private boolean turboOn;

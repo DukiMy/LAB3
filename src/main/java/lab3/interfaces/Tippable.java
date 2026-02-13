@@ -5,9 +5,9 @@
  *  Gränssnittet avgränsar beteenden hos objekt med tippbara flak.
  */
 
-package lab3;
+package lab3.interfaces;
 
-interface Tippable extends Movable{
+public interface Tippable extends Movable{
 
   void setTipBedAngle(byte angle);
   double getTipBedAngle();

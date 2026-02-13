@@ -7,9 +7,9 @@ package lab3;
 
 import java.util.Set;
 import java.util.HashSet;
-import java.awt.geom.Point2D;
 import java.util.function.Predicate;
 
+import java.awt.geom.Point2D;
 
 abstract class GameObject {
   private static final Set<GameObject> gameObjects = new HashSet<>();

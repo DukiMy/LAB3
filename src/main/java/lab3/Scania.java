@@ -6,6 +6,8 @@
 package lab3;
 import static java.awt.Color.BLUE;
 
+import lab3.interfaces.Tippable;
+
 public final class Scania extends ConditionallyMovableVehicle implements Tippable {
   private byte tipBedAngle = 0;
 

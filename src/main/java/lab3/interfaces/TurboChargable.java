@@ -5,7 +5,7 @@
  *  Gränssnittet avgränsar beteenden hos objekt med avstängbar turbo.
  */
 
-package lab3;
+package lab3.interfaces;
 
 public interface TurboChargable extends Movable {
   public void setTurbo(boolean state);

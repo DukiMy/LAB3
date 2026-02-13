@@ -10,6 +10,8 @@ import static java.lang.Math.sin;
 
 import java.awt.Color;
 
+import lab3.interfaces.Movable;
+
 abstract class Vehicle extends GameObject implements Movable {
 
 	private int nrDoors;

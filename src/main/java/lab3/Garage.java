@@ -16,6 +16,7 @@ package lab3;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import static java.lang.System.out;
 
 public final class Garage<T extends Vehicle> extends GameObject {
