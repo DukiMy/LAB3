@@ -164,7 +164,6 @@ class VehicleTest {
     Vehicle v = track(new Saab95());
     double speedBefore;
 
-    v = new Saab95();
     v.startEngine();
     v.gas(speedIncrease);
     speedBefore = v.getCurrentSpeed();
