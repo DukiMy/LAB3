@@ -6,8 +6,8 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupoter.api.AfterEach;
-import org.junit.jupoter.api.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 
 public abstract class TestUtils {
   
