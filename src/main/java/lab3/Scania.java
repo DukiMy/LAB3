@@ -3,7 +3,7 @@
  *  Kontakt: gusmizdu@student.gu.se
  */
 
-package lab2;
+package lab3;
 import static java.awt.Color.BLUE;
 
 public final class Scania extends ConditionallyMovableVehicle implements Tippable {

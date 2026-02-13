@@ -6,7 +6,7 @@
  *  rampar.
  */
 
-package lab2;
+package lab3;
 
 interface RampOperated extends Loadable {
   void lowerRamp();

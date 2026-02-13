@@ -1,4 +1,4 @@
-package lab2;
+package lab3;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -9,20 +9,7 @@ import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
-public class GarageTests {
-
-  private final List<GameObject> created = new ArrayList<>();
-
-  private <T extends GameObject> T track(T obj) {
-    created.add(obj);
-    return obj;
-  }
-
-  @AfterEach
-  void cleanup() {
-    for (GameObject o : created) o.destroy();
-    created.clear();
-  }
+public class GarageTests extends TestUtils {
 
   @Test
   void ctorRejectsInvalidCapacity() {

@@ -3,7 +3,7 @@
  *  Kontakt: gusmizdu@student.gu.se
  */
 
-package lab2;
+package lab3;
 
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;

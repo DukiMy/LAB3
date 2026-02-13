@@ -3,7 +3,7 @@
  *  Kontakt: gusmizdu@student.gu.se
  */
 
-package lab2;
+package lab3;
 
 import java.util.ArrayDeque;
 import java.util.Deque;

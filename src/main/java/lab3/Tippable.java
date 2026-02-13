@@ -5,7 +5,7 @@
  *  Gränssnittet avgränsar beteenden hos objekt med tippbara flak.
  */
 
-package lab2;
+package lab3;
 
 interface Tippable extends Movable{
 

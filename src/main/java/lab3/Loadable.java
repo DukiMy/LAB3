@@ -5,7 +5,7 @@
  *  Gränssnittet avgränsar beteenden hos objekt som kan lasta in andra objekt.
  */
 
-package lab2;
+package lab3;
 
 interface Loadable {
   void load();

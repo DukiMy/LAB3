@@ -12,7 +12,7 @@
  *    -
  */
 
-package lab2;
+package lab3;
 
 import java.util.ArrayList;
 import java.util.List;
