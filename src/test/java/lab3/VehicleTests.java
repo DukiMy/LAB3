@@ -1,26 +1,47 @@
 package lab3;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static java.lang.System.out;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import static java.lang.System.out;
 
 class VehicleTest {
+  private final List<GameObject> created = new ArrayList<>();
+
+  private <T extends GameObject> T track(T obj) {
+    created.add(obj);
+    return obj;
+  }
+
+  @AfterEach
+  void cleanup() {
+    for (GameObject o : created) o.destroy();
+    created.clear();
+  }
 
   @Test
   void vehicleMovesForward() {
     double startX;
     double startY;
+    Vehicle v;
 
-    ArrayList<Vehicle> vehicles = new ArrayList<>();
-    vehicles.add(new Volvo240());
-    vehicles.add(new Saab95());
+    track(new Volvo240());
+    track(new Saab95());
 
-    for (Vehicle v : vehicles) {
-      startX = v.getX();
-      startY = v.getY();
+    for (GameObject gObj : created) {
+      startX = gObj.getX();
+      startY = gObj.getY();
+
+      v = (Vehicle) gObj;
 
       v.startEngine();
       v.gas(0.3);
@@ -38,17 +59,17 @@ class VehicleTest {
 
   @Test
   void turningChangesDirection() {
-
-    ArrayList<Vehicle> vehicles = new ArrayList<>();
-    vehicles.add(new Volvo240());
-    vehicles.add(new Saab95());
-
     double dirBeforeTurn;
     double dirAfterTurn;
     boolean hasLeftTurn;
     boolean hasRightTurn;
+    Vehicle v;
 
-    for (Vehicle v : vehicles) {
+    track(new Volvo240());
+    track(new Saab95());
+
+    for (GameObject gObj : created) {
+      v = (Vehicle) gObj;
 
       dirBeforeTurn = v.getDirection();
       v.turnLeft();
@@ -74,16 +95,19 @@ class VehicleTest {
   void brakeReducesSpeed() {
     double speedBeforeBraking;
     double speedAfterBreaking;
+    Vehicle v;
 
-    ArrayList<Vehicle> vehicles = new ArrayList<>();
-    vehicles.add(new Volvo240());
-    vehicles.add(new Saab95());
-    vehicles.add(new VolvoFH16());
-    vehicles.add(new Scania());
+    track(new Volvo240());
+    track(new Saab95());
+    track(new VolvoFH16());
+    track(new Scania());
 
-    for (Vehicle v : vehicles) {
+    for (GameObject gObj : created) {
+      v = (Vehicle) gObj;
+
       v.startEngine();
       v.gas(0.5);
+      v.move();
       speedBeforeBraking = v.getCurrentSpeed();
 
       v.brake(0.5);
@@ -101,13 +125,14 @@ class VehicleTest {
 
   @Test
   void gasRejectsOutOfRange() {
-    ArrayList<Vehicle> vehicles = new ArrayList<>();
-    vehicles.add(new Volvo240());
-    vehicles.add(new Saab95());
-    vehicles.add(new VolvoFH16());
-    vehicles.add(new Scania());
+    track(new Volvo240());
+    track(new Saab95());
+    track(new VolvoFH16());
+    track(new Scania());
 
-    for (Vehicle v : vehicles) {
+    for (GameObject gObj : created) {
+      Vehicle v = (Vehicle) gObj;
+
       assertThrows(IllegalArgumentException.class, () -> v.gas(-0.0001));
       assertThrows(IllegalArgumentException.class, () -> v.gas( 1.0001));
     }
@@ -115,13 +140,14 @@ class VehicleTest {
 
   @Test
   void brakeRejectsOutOfRange() {
-    ArrayList<Vehicle> vehicles = new ArrayList<>();
-    vehicles.add(new Volvo240());
-    vehicles.add(new Saab95());
-    vehicles.add(new VolvoFH16());
-    vehicles.add(new Scania());
+    track(new Volvo240());
+    track(new Saab95());
+    track(new VolvoFH16());
+    track(new Scania());
 
-    for (Vehicle v : vehicles) {
+    for (GameObject gObj : created) {
+      Vehicle v = (Vehicle) gObj;
+
       assertThrows(IllegalArgumentException.class, () -> v.brake(-0.0001d));
       assertThrows(IllegalArgumentException.class, () -> v.brake( 1.0001d));
     }
@@ -129,42 +155,45 @@ class VehicleTest {
 
   @Test
   void turboIncreasesSpeed() {
-    Vehicle movableVehicle;
-    TurboChargable turboVehicle;
     double speedIncrease = 0.3d;
+
+    Vehicle v = track(new Saab95());
     double speedBefore;
+
+    v = new Saab95();
+    v.startEngine();
+    v.gas(speedIncrease);
+    speedBefore = v.getCurrentSpeed();
+    v.stopEngine();
+
+    TurboChargable turboV = (TurboChargable) v;
+    turboV.setTurbo(true);
+
     double speedAfter;
-
-    movableVehicle = new Saab95();
-    movableVehicle.startEngine();
-    movableVehicle.gas(speedIncrease);
-    speedBefore = movableVehicle.getCurrentSpeed();
-    movableVehicle.stopEngine();
-
-    turboVehicle = (TurboChargable)movableVehicle;
-    turboVehicle.setTurbo(true);
-    movableVehicle = (Saab95)turboVehicle;
-    movableVehicle.startEngine();
-    movableVehicle.gas(speedIncrease);
-    speedAfter = movableVehicle.getCurrentSpeed();
-    movableVehicle.stopEngine();
+    v = (Saab95)turboV;
+    v.startEngine();
+    v.gas(speedIncrease);
+    speedAfter = v.getCurrentSpeed();
+    v.stopEngine();
 
     assertTrue(
       speedBefore < speedAfter,
-      "Turbo did not increase speed"
+      "Turbon ökade inte farten."
     );
   }
 
   @Test
   void setCurrentSpeedBoundsWork() {
+    Vehicle v;
 
-    ArrayList<Vehicle> vehicles = new ArrayList<>();
-    vehicles.add(new Volvo240());
-    vehicles.add(new Saab95());
-    vehicles.add(new VolvoFH16());
-    vehicles.add(new Scania());
+    track(new Volvo240());
+    track(new Saab95());
+    track(new VolvoFH16());
+    track(new Scania());
 
-    for (Vehicle v : vehicles) {
+    for (GameObject gObj : created) {
+      v = (Vehicle) gObj;
+
       v.startEngine();
       for (int i = 0; i < 150; i++) {
         v.gas(1.0d);
@@ -190,13 +219,15 @@ class VehicleTest {
 
   @Test
   void toStringIsOverridden() throws NoSuchMethodException {
-    ArrayList<Vehicle> vehicles = new ArrayList<>();
-    vehicles.add(new Volvo240());
-    vehicles.add(new Saab95());
-    vehicles.add(new VolvoFH16());
-    vehicles.add(new Scania());
+    Vehicle v;
 
-    for (Vehicle v : vehicles) {
+    track(new Volvo240());
+    track(new Saab95());
+    track(new VolvoFH16());
+    track(new Scania());
+
+    for (GameObject gObj : created) {
+      v = (Vehicle) gObj;
       String toString = v.toString();
       assertNotNull(toString);
       assertFalse(toString.isBlank());
@@ -213,14 +244,17 @@ class VehicleTest {
 
   @Test
   void colorIsMutatedAndAccessed() {
-    ArrayList<Vehicle> vehicles = new ArrayList<>();
-    vehicles.add(new Volvo240());
-    vehicles.add(new Saab95());
-    vehicles.add(new VolvoFH16());
-    vehicles.add(new Scania());
+    Vehicle v;
+    Color c;
 
-    for (Vehicle v : vehicles) {
-      Color c = new Color(0);
+    track(new Volvo240());
+    track(new Saab95());
+    track(new VolvoFH16());
+    track(new Scania());
+
+    for (GameObject gObj : created) {
+      v = (Vehicle) gObj;
+      c = new Color(0);
       v.setColor(c.getRGB());
 
       assertTrue(
@@ -232,13 +266,16 @@ class VehicleTest {
 
   @Test
   void vehicleHasDoors() {
-    ArrayList<Vehicle> vehicles = new ArrayList<>();
-    vehicles.add(new Volvo240());
-    vehicles.add(new Saab95());
-    vehicles.add(new VolvoFH16());
-    vehicles.add(new Scania());
+    Vehicle v;
 
-    for (Vehicle v : vehicles) {
+    track(new Volvo240());
+    track(new Saab95());
+    track(new VolvoFH16());
+    track(new Scania());
+
+    for (GameObject gObj : created) {
+      v = (Vehicle) gObj;
+
       assertTrue(
         0 < v.getNrDoors(),
         "Vehicle " + v.getModelName() + " har inga dörrar."

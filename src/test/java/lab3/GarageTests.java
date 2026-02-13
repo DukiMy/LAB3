@@ -9,7 +9,20 @@ import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
-public class GarageTests extends TestUtils {
+public class GarageTests {
+ 
+  private final List<GameObject> created = new ArrayList<>();
+
+  private <T extends GameObject> T track(T obj) {
+    created.add(obj);
+    return obj;
+  }
+
+  @AfterEach
+  void cleanup() {
+    for (GameObject o : created) o.destroy();
+    created.clear();
+  }
 
   @Test
   void ctorRejectsInvalidCapacity() {

@@ -4,121 +4,122 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 public class TippableVehiclesTest {
+  private final List<GameObject> created = new ArrayList<>();
+
+  private <T extends GameObject> T track(T obj) {
+    created.add(obj);
+    return obj;
+  }
+
+  @AfterEach
+  void cleanup() {
+    for (GameObject o : created) o.destroy();
+    created.clear();
+  }
 
   @Test
   void tipBedChangesAngle() {
-    ArrayList<Tippable> tippableVehicles = new ArrayList<>();
-    tippableVehicles.add(new Scania());
+    Tippable tippable = track(new Scania());
+    byte angle = 70;
+    double before = tippable.getTipBedAngle();
+    double after;
 
-    for (Tippable tippableVehicle : tippableVehicles) {
-      byte angle = 70;
+    tippable.setTipBedAngle(angle);
+    after = tippable.getTipBedAngle();
 
-      double before = tippableVehicle.getTipBedAngle();
-      double after;
-
-      tippableVehicle.setTipBedAngle(angle);
-      after = tippableVehicle.getTipBedAngle();
-
-      assertTrue(
-        before != after,
-        "Flaket borde byta vinkel."
-      );
-    }
+    assertTrue(
+      before != after,
+      "Flaket borde byta vinkel."
+    );
   }
 
   @Test
   void outsideTipBedAngleBoundsThrowsException() {
-    ArrayList<Tippable> tippableVehicles = new ArrayList<>();
-    tippableVehicles.add(new Scania());
+    Tippable tippable = track(new Scania());
+    byte lowerAngleBound = -1;
+    byte upperAngleBound = 71;
 
-    byte lowerExceedingAngle = -1;
-    byte upperExceedingAngle = 71;
+    assertThrows(
+      IllegalArgumentException.class,
+        () -> tippable.setTipBedAngle(lowerAngleBound),
+        "IllegalArgumentException borde kastas."
+    );
 
-    for (Tippable tippableVehicle : tippableVehicles) {
-      assertThrows(
-        IllegalArgumentException.class,
-         () -> tippableVehicle.setTipBedAngle(lowerExceedingAngle),
-         "IllegalArgumentException borde kastas."
-      );
-
-      assertThrows(
-        IllegalArgumentException.class,
-         () -> tippableVehicle.setTipBedAngle(upperExceedingAngle),
-         "IllegalArgumentException borde kastas."
-      );
-    }
+    assertThrows(
+      IllegalArgumentException.class,
+        () -> tippable.setTipBedAngle(upperAngleBound),
+        "IllegalArgumentException borde kastas."
+    );
   }
 
   @Test
   void cantMoveWhileTipped() {
-    ArrayList<Tippable> tippableVehicles = new ArrayList<>();
-    tippableVehicles.add(new Scania());
-
+    ConditionallyMovableVehicle scania = track(new Scania());
+    Tippable tipBed = (Tippable) scania;
     byte lowestTipAngle = 1;
     byte highestTipAngle = 70;
     Point2D beforeMoveAttempt;
     Point2D afterMoveAttempt;
 
-    for (Tippable tippableVehicle : tippableVehicles) {
-      ConditionallyMovableVehicle tipped =  (ConditionallyMovableVehicle) tippableVehicle;
+    tipBed.setTipBedAngle(lowestTipAngle);
+    beforeMoveAttempt = scania.getPoint();
 
-      tippableVehicle.setTipBedAngle(lowestTipAngle);
-      beforeMoveAttempt = tipped.getPoint();
+    scania.startEngine();
+    scania.gas(0.5d);
+    scania.move();
+    afterMoveAttempt = scania.getPoint();
 
-      tipped.startEngine();
-      tipped.gas(0.5d);
-      tipped.move();
-      afterMoveAttempt = tipped.getPoint();
+    assertEquals(
+      beforeMoveAttempt,
+      afterMoveAttempt,
+      "Bilen borde inte röra sig när flaket är tippat till 1 vinkelgrad"
+    );
 
-      assertEquals(
-        beforeMoveAttempt,
-        afterMoveAttempt,
-        "Bilen borde inte röra sig när flaket är tippat till 1 vinkelgrad"
-      );
+    scania.stopEngine();
+    tipBed.setTipBedAngle(highestTipAngle);
 
-      tipped.stopEngine();
-      tippableVehicle.setTipBedAngle(highestTipAngle);
-      beforeMoveAttempt = tipped.getPoint();
+    beforeMoveAttempt = scania.getPoint();
 
-      tipped.move();
-      afterMoveAttempt = tipped.getPoint();
-      assertEquals(
-        beforeMoveAttempt,
-        afterMoveAttempt,
-        "Bilen borde inte röra sig när flaket är tippat till max vinkelgrad."
-      );
-    }
+    scania.startEngine();
+    scania.gas(0.5d);
+    scania.move();
+
+    afterMoveAttempt = scania.getPoint();
+
+    assertEquals(
+      beforeMoveAttempt,
+      afterMoveAttempt,
+      "Bilen borde inte röra sig när flaket är tippat till max vinkelgrad."
+    );
   }
 
   @Test
   void cantTipWhileMoving() {
-    ArrayList<Tippable> tippableVehicles = new ArrayList<>();
-    tippableVehicles.add(new Scania());
-
+    ConditionallyMovableVehicle scania = track(new Scania());
+    Tippable tipBed = (Tippable) scania;
     byte lowestTipAngle = 1;
     byte highestTipAngle = 70;
 
-    for (Tippable tippableVehicle : tippableVehicles) {
-      ConditionallyMovableVehicle movingVehicle = (ConditionallyMovableVehicle) tippableVehicle;
+    scania.startEngine();
+    scania.gas(0.5d);
+    scania.move();
 
-      movingVehicle.startEngine();
-      movingVehicle.gas(0.5d);
-      movingVehicle.move();
+    assertThrows(
+      IllegalStateException.class,
+      () -> tipBed.setTipBedAngle(lowestTipAngle),
+      "IllegalStateException bör kastas."
+    );
 
-      assertThrows(
-        IllegalStateException.class,
-        () -> tippableVehicle.setTipBedAngle(lowestTipAngle),
-        "IllegalStateException bör kastas."
-      );
-
-      assertThrows(
-        IllegalStateException.class,
-        () -> tippableVehicle.setTipBedAngle(highestTipAngle),
-        "IllegalStateException bör kastas."
-      );
-    }
+    assertThrows(
+      IllegalStateException.class,
+      () -> tipBed.setTipBedAngle(highestTipAngle),
+      "IllegalStateException bör kastas."
+    );
   }
 }

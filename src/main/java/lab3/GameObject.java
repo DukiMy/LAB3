@@ -29,15 +29,14 @@ abstract class GameObject {
   }
 
   public void mutatePoint(double x, double y) {
-
     pos.setLocation(x, y);
   }
 
   public <T extends Vehicle> T getClosestInRange(
     Class<T> type,
     double loadRadius,
-    Predicate<? super T> allowed
-  ) {
+    Predicate<? super T> allowed) {
+
     if (loadRadius < 0) {
       throw new IllegalArgumentException(
         String.format("Parameter 'loadRadius' = %.2f is negative.", loadRadius)
