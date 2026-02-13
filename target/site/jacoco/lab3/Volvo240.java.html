@@ -4,6 +4,7 @@
  */
 
 package lab3;
+
 import static java.awt.Color.BLACK;
 
 public final class Volvo240 extends Vehicle implements Car{
@@ -11,7 +12,7 @@ public final class Volvo240 extends Vehicle implements Car{
 	private static final double TRIM_FACTOR = 1.25d;
 
 	public Volvo240() {
-<span class="fc" id="L14">		super(</span>
+<span class="fc" id="L15">		super(</span>
       /* Number of doors */ 4,
       /* Engine power    */ 100.0d,
       /* Vehicle color   */ BLACK,
@@ -19,23 +20,23 @@ public final class Volvo240 extends Vehicle implements Car{
       /* X position      */ 0.0d,
       /* Y position      */ 0.0d
      );
-<span class="fc" id="L22">	}</span>
+<span class="fc" id="L23">	}</span>
 
 	private double speedFactor() {
-<span class="fc" id="L25">		return getEnginePower() * 0.01d * TRIM_FACTOR;</span>
+<span class="fc" id="L26">		return getEnginePower() * 0.01d * TRIM_FACTOR;</span>
 	}
 
   @Override
 	protected double increaseSpeedFactor(double speedIncrease) {
-<span class="fc" id="L30">    return Math.min(getCurrentSpeed() + speedFactor() * speedIncrease, getEnginePower());</span>
+<span class="fc" id="L31">    return Math.min(getCurrentSpeed() + speedFactor() * speedIncrease, getEnginePower());</span>
 	}
 
 	@Override
 	protected double decreaseSpeedFactor(double speedDecrease) {
-<span class="fc" id="L35">    return Math.max(getCurrentSpeed() - speedFactor() * speedDecrease, 0.0d);</span>
+<span class="fc" id="L36">    return Math.max(getCurrentSpeed() - speedFactor() * speedDecrease, 0.0d);</span>
 	}
 
   @Override
-<span class="fc" id="L39">  protected String subToString() { return &quot;, \n\tTRIM_FACTOR = &quot; + TRIM_FACTOR; }</span>
+<span class="fc" id="L40">  protected String subToString() { return &quot;, \n\tTRIM_FACTOR = &quot; + TRIM_FACTOR; }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

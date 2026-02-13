@@ -6,12 +6,14 @@
 package lab3;
 import static java.awt.Color.RED;
 
+import lab3.interfaces.TurboChargable;
+
 public final class Saab95 extends Vehicle implements Car, TurboChargable{
 
 	private boolean turboOn;
 
 	public Saab95() {
-<span class="fc" id="L14">		super(</span>
+<span class="fc" id="L16">		super(</span>
       /* Number of doors */ 2,
       /* Engine power    */ 125.0d,
       /* Vehicle Color   */ RED,
@@ -20,28 +22,28 @@ public final class Saab95 extends Vehicle implements Car, TurboChargable{
       /* Y position      */ 0.0d
     );
 
-<span class="fc" id="L23">    turboOn = false;</span>
-<span class="fc" id="L24">	}</span>
+<span class="fc" id="L25">    turboOn = false;</span>
+<span class="fc" id="L26">	}</span>
 
-<span class="fc" id="L26">	public void setTurbo(boolean state) { turboOn = state; }</span>
+<span class="fc" id="L28">	public void setTurbo(boolean state) { turboOn = state; }</span>
 
 	private double speedFactor() {
-<span class="fc bfc" id="L29" title="All 2 branches covered.">		return getEnginePower() * 0.01d * (turboOn ? 1.3d : 1.0d);</span>
+<span class="fc bfc" id="L31" title="All 2 branches covered.">		return getEnginePower() * 0.01d * (turboOn ? 1.3d : 1.0d);</span>
 	}
 
   @Override
 	protected double increaseSpeedFactor(double speedIncrease) {
-<span class="fc" id="L34">    return getCurrentSpeed() + speedFactor() * speedIncrease;</span>
+<span class="fc" id="L36">    return getCurrentSpeed() + speedFactor() * speedIncrease;</span>
 	}
 
 	@Override
 	protected double decreaseSpeedFactor(double speedDecrease) {
-<span class="fc" id="L39">    return getCurrentSpeed() - speedFactor() * speedDecrease;</span>
+<span class="fc" id="L41">    return getCurrentSpeed() - speedFactor() * speedDecrease;</span>
 	}
 
   @Override
   protected String subToString() {
-<span class="fc" id="L44">    return &quot;, \n\tturboOn = &quot; + turboOn;</span>
+<span class="fc" id="L46">    return &quot;, \n\tturboOn = &quot; + turboOn;</span>
   }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>
