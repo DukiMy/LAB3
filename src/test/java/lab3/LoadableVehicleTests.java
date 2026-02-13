@@ -1,6 +1,10 @@
 package lab3;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
@@ -8,6 +12,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+
+import lab3.interfaces.Loadable;
 
 public class LoadableVehicleTests {
   private final List<GameObject> created = new ArrayList<>();

@@ -1,6 +1,8 @@
 package lab3;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
@@ -10,7 +12,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 public class GarageTests {
- 
+
   private final List<GameObject> created = new ArrayList<>();
 
   private <T extends GameObject> T track(T obj) {

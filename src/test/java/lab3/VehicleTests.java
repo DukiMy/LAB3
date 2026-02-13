@@ -14,6 +14,8 @@ import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
+import lab3.interfaces.TurboChargable;
+
 class VehicleTest {
   private final List<GameObject> created = new ArrayList<>();
 
@@ -36,6 +38,7 @@ class VehicleTest {
 
     track(new Volvo240());
     track(new Saab95());
+    track(new VolvoFH16());
 
     for (GameObject gObj : created) {
       startX = gObj.getX();
@@ -67,6 +70,7 @@ class VehicleTest {
 
     track(new Volvo240());
     track(new Saab95());
+    track(new VolvoFH16());
 
     for (GameObject gObj : created) {
       v = (Vehicle) gObj;
