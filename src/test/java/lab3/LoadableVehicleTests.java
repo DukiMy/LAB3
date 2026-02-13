@@ -13,8 +13,6 @@ import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
-import lab3.interfaces.Loadable;
-
 public class LoadableVehicleTests {
   private final List<GameObject> created = new ArrayList<>();
 
