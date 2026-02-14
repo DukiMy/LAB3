@@ -1,4 +1,4 @@
-package lab3;
+package lab3.interfaces;
 
 public interface Car {
 

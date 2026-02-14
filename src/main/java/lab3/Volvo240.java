@@ -7,6 +7,8 @@ package lab3;
 
 import static java.awt.Color.BLACK;
 
+import lab3.interfaces.Car;
+
 public final class Volvo240 extends Vehicle implements Car{
 
 	private static final double TRIM_FACTOR = 1.25d;
