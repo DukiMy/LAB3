@@ -1,3 +1,6 @@
 {
-  "java.configuration.updateBuildConfiguration": "interactive"
+  "java.project.sourcePaths": ["ui/src/main/java", "model/src/main/java"],
+  "java.project.outputPath": "ui/target/classes",
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "FSharp.suggestGitignore": false
 }
