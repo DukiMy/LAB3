@@ -1,15 +1,20 @@
 package lab3;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.awt.geom.Point2D;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+
+import static java.lang.System.out;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 
 public class GarageTests {
 
@@ -195,5 +200,27 @@ public class GarageTests {
       volvo.getPoint(),
       "Fel typ får aldrig lastas."
     );
+  }
+
+  @Test
+  void toStringIsOverridden() throws NoSuchMethodException {
+    track(new Garage<>(
+      Vehicle.class,
+      new Point2D.Double(1.0d, 1.0d),
+      10)
+    );
+
+    for (GameObject gObj : created) {
+      String toString = gObj.toString();
+      assertFalse(toString.isBlank());
+      assertEquals(
+        gObj.getClass(),
+        gObj.getClass()
+          .getMethod("toString")
+          .getDeclaringClass()
+      );
+
+      out.println(gObj.toString());
+    }
   }
 }

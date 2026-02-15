@@ -1,25 +1,26 @@
 package lab3;
 
-import static java.lang.System.out;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import lab3.interfaces.TurboChargable;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+
+import java.awt.Color;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
-import lab3.interfaces.TurboChargable;
+import static java.lang.System.out;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class VehicleTest {
-  private final List<GameObject> created = new ArrayList<>();
+  private final List<Vehicle> created = new ArrayList<>();
 
-  private <T extends GameObject> T track(T obj) {
+  private <T extends Vehicle> T track(T obj) {
     created.add(obj);
     return obj;
   }
@@ -34,17 +35,14 @@ class VehicleTest {
   void vehicleMovesForward() {
     double startX;
     double startY;
-    Vehicle v;
 
     track(new Volvo240());
     track(new Saab95());
     track(new VolvoFH16());
 
-    for (GameObject gObj : created) {
-      startX = gObj.getX();
-      startY = gObj.getY();
-
-      v = (Vehicle) gObj;
+    for (Vehicle v : created) {
+      startX = v.getX();
+      startY = v.getY();
 
       v.startEngine();
       v.gas(0.3);
@@ -66,15 +64,12 @@ class VehicleTest {
     double dirAfterTurn;
     boolean hasLeftTurn;
     boolean hasRightTurn;
-    Vehicle v;
 
     track(new Volvo240());
     track(new Saab95());
     track(new VolvoFH16());
 
-    for (GameObject gObj : created) {
-      v = (Vehicle) gObj;
-
+    for (Vehicle v : created) {
       dirBeforeTurn = v.getDirection();
       v.turnLeft();
       dirAfterTurn = v.getDirection();
@@ -99,16 +94,13 @@ class VehicleTest {
   void brakeReducesSpeed() {
     double speedBeforeBraking;
     double speedAfterBreaking;
-    Vehicle v;
 
     track(new Volvo240());
     track(new Saab95());
     track(new VolvoFH16());
     track(new Scania());
 
-    for (GameObject gObj : created) {
-      v = (Vehicle) gObj;
-
+    for (Vehicle v : created) {
       v.startEngine();
       v.gas(0.5);
       v.move();
@@ -134,9 +126,7 @@ class VehicleTest {
     track(new VolvoFH16());
     track(new Scania());
 
-    for (GameObject gObj : created) {
-      Vehicle v = (Vehicle) gObj;
-
+    for (Vehicle v : created) {
       assertThrows(IllegalArgumentException.class, () -> v.gas(-0.0001));
       assertThrows(IllegalArgumentException.class, () -> v.gas( 1.0001));
     }
@@ -149,8 +139,7 @@ class VehicleTest {
     track(new VolvoFH16());
     track(new Scania());
 
-    for (GameObject gObj : created) {
-      Vehicle v = (Vehicle) gObj;
+    for (Vehicle v : created) {
       assertThrows(IllegalArgumentException.class, () -> v.brake(-0.0001d));
       assertThrows(IllegalArgumentException.class, () -> v.brake( 1.0001d));
     }
@@ -186,16 +175,12 @@ class VehicleTest {
 
   @Test
   void setCurrentSpeedBoundsWork() {
-    Vehicle v;
-
     track(new Volvo240());
     track(new Saab95());
     track(new VolvoFH16());
     track(new Scania());
 
-    for (GameObject gObj : created) {
-      v = (Vehicle) gObj;
-
+    for (Vehicle v : created) {
       v.startEngine();
       for (int i = 0; i < 150; i++) {
         v.gas(1.0d);
@@ -221,32 +206,27 @@ class VehicleTest {
 
   @Test
   void toStringIsOverridden() throws NoSuchMethodException {
-    Vehicle v;
-
     track(new Volvo240());
     track(new Saab95());
     track(new VolvoFH16());
     track(new Scania());
 
     for (GameObject gObj : created) {
-      v = (Vehicle) gObj;
-      String toString = v.toString();
-      assertNotNull(toString);
-      assertFalse(toString.isBlank());
+
+      assertFalse(gObj.toString().isBlank());
       assertEquals(
-        v.getClass(),
-        v.getClass()
+        gObj.getClass(),
+        gObj.getClass()
           .getMethod("toString")
           .getDeclaringClass()
       );
 
-      out.println(v.toString());
+      out.println(gObj.toString());
     }
   }
 
   @Test
   void colorIsMutatedAndAccessed() {
-    Vehicle v;
     Color c;
 
     track(new Volvo240());
@@ -254,8 +234,7 @@ class VehicleTest {
     track(new VolvoFH16());
     track(new Scania());
 
-    for (GameObject gObj : created) {
-      v = (Vehicle) gObj;
+    for (Vehicle v : created) {
       c = new Color(0);
       v.setColor(c.getRGB());
 
@@ -268,16 +247,12 @@ class VehicleTest {
 
   @Test
   void vehicleHasDoors() {
-    Vehicle v;
-
     track(new Volvo240());
     track(new Saab95());
     track(new VolvoFH16());
     track(new Scania());
 
-    for (GameObject gObj : created) {
-      v = (Vehicle) gObj;
-
+    for (Vehicle v : created) {
       assertTrue(
         0 < v.getNrDoors(),
         "Vehicle " + v.getModelName() + " har inga dörrar."

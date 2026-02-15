@@ -19,7 +19,6 @@ import static java.awt.Color.YELLOW;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import static org.apache.commons.lang3.builder.ToStringStyle.MULTI_LINE_STYLE;
 
-
 public final class VolvoFH16 extends ConditionallyMovableVehicle implements RampOperated {
 
   private static final double LOAD_RADIUS = 5.0d;
