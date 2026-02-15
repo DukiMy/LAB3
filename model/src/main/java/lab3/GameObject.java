@@ -21,7 +21,7 @@ abstract class GameObject {
   private static final Set<GameObject> gameObjects = new HashSet<>();
   private final Point2D pos;
 
-  protected GameObject(double x, double y) {
+  protected GameObject(final double x, final double y) {
     isTrue((x >= 0.0d) && (y >= 0.0d));
     finite(x);
     finite(y);
@@ -38,7 +38,7 @@ abstract class GameObject {
     return new Point2D.Double(pos.getX(), pos.getY());
   }
 
-  public void mutatePoint(double x, double y) {
+  public void mutatePoint(final double x, final double y) {
     finite(x);
     finite(y);
 
@@ -46,9 +46,9 @@ abstract class GameObject {
   }
 
   public <T extends Vehicle> T getClosestInRange(
-    Class<T> type,
-    double loadRadius,
-    Predicate<? super T> allowed) {
+    final Class<T> type,
+    final double loadRadius,
+    final Predicate<? super T> allowed) {
 
     requireNonNull(type);
     isTrue(loadRadius > 1);

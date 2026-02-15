@@ -25,7 +25,13 @@ abstract class Vehicle extends GameObject implements Movable {
 	private Color color;
 	private String modelName;
 
-	protected Vehicle(int nrDoors, double enginePower, Color color, String modelName, double x, double y) {
+	protected Vehicle(
+    final int nrDoors,
+    final double enginePower,
+    final Color color,
+    final String modelName,
+    final double x,
+    final double y) {
     super(x, y);
 
     Validate.inclusiveBetween(1, 5, nrDoors);
@@ -56,7 +62,7 @@ abstract class Vehicle extends GameObject implements Movable {
 
   public String getModelName() { return modelName; }
 
-  public void setColor(int c) { color = new Color(c); }
+  public void setColor(final int c) { color = new Color(c); }
 
 	public void startEngine() { setCurrentSpeed(0.1d); }
 
@@ -66,17 +72,21 @@ abstract class Vehicle extends GameObject implements Movable {
 
   public void turnRight() { direction -= TURN_RATE; }
 
-  private static final void validate(double lowBound, double highBound, double arg) {
+  private static final void validate(
+    final double lowBound,
+    final double highBound,
+    final double arg) {
+
     Validate.finite(arg);
     Validate.isTrue(lowBound <= arg && arg <= highBound);
   }
 
-  public void brake(double speedDecrease) {
+  public void brake(final double speedDecrease) {
     validate(0.0d, 1.0d, speedDecrease);
     decreaseSpeed(speedDecrease);
 	}
 
-  public void gas(double speedIncrease) {
+  public void gas(final double speedIncrease) {
     validate(0.0d, 1.0d, speedIncrease);
     increaseSpeed(speedIncrease);
 	}
@@ -88,7 +98,7 @@ abstract class Vehicle extends GameObject implements Movable {
     );
   }
 
-  private void setCurrentSpeed(double setSpeed) {
+  private void setCurrentSpeed(final double setSpeed) {
     if (setSpeed > getEnginePower()) {
       currentSpeed = getEnginePower();
       return;
@@ -101,18 +111,18 @@ abstract class Vehicle extends GameObject implements Movable {
     }
   }
 
-	private void increaseSpeed(double speedIncrease) {
+	private void increaseSpeed(final double speedIncrease) {
 		setCurrentSpeed(
       increasedSpeedFactor(speedIncrease)
     );
 	}
 
-	private void decreaseSpeed(double speedDecrease) {
+	private void decreaseSpeed(final double speedDecrease) {
 		setCurrentSpeed(
       decreasedSpeedFactor(speedDecrease)
     );
 	}
 
-  protected abstract double increasedSpeedFactor(double speedIncrease);
-  protected abstract double decreasedSpeedFactor(double speedDecrease);
+  protected abstract double increasedSpeedFactor(final double speedIncrease);
+  protected abstract double decreasedSpeedFactor(final double speedDecrease);
 }

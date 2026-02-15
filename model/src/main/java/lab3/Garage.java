@@ -33,7 +33,11 @@ public final class Garage<T extends Vehicle> extends GameObject {
   private final List<T> parkingLot = new ArrayList<>();
   private final Class<T> type;
 
-  public Garage(Class<T> type, double x, double y, int maxCapacity) {
+  public Garage(
+    final Class<T> type,
+    final double x,
+    final double y,
+    final int maxCapacity) {
     super(x, y);
 
     requireNonNull(type);
@@ -59,7 +63,7 @@ public final class Garage<T extends Vehicle> extends GameObject {
     v.mutatePoint(getX(), getY());
   }
 
-  public void unLoad(T vehicle) {
+  public void unLoad(final T vehicle) {
     requireNonNull(vehicle);
 
     if (parkingLot.remove(vehicle)) {

@@ -29,19 +29,19 @@ public final class Saab95 extends Vehicle implements Car, TurboChargable{
     turboOn = false;
 	}
 
-	public void setTurbo(boolean state) { turboOn = state; }
+	public void setTurbo(final boolean state) { turboOn = state; }
 
 	private double speedFactor() {
 		return getEnginePower() * 0.01d * (turboOn ? 1.3d : 1.0d);
 	}
 
   @Override
-	protected double increasedSpeedFactor(double speedIncrease) {
+	protected double increasedSpeedFactor(final double speedIncrease) {
     return getCurrentSpeed() + speedFactor() * speedIncrease;
 	}
 
 	@Override
-	protected double decreasedSpeedFactor(double speedDecrease) {
+	protected double decreasedSpeedFactor(final double speedDecrease) {
     return getCurrentSpeed() - speedFactor() * speedDecrease;
 	}
 

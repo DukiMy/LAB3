@@ -30,7 +30,7 @@ public final class Scania extends ConditionallyMovableVehicle implements Tippabl
     tipBedAngle = 0;
   }
 
-  public void setTipBedAngle(byte angle) {
+  public void setTipBedAngle(final byte angle) {
     double speed = getCurrentSpeed();
 
     isTrue(0 <= angle && angle <= 70);
