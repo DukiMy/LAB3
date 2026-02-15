@@ -151,7 +151,6 @@ class VehicleTest {
 
     for (GameObject gObj : created) {
       Vehicle v = (Vehicle) gObj;
-
       assertThrows(IllegalArgumentException.class, () -> v.brake(-0.0001d));
       assertThrows(IllegalArgumentException.class, () -> v.brake( 1.0001d));
     }

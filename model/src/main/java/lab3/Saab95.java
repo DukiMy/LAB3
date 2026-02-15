@@ -33,12 +33,12 @@ public final class Saab95 extends Vehicle implements Car, TurboChargable{
 	}
 
   @Override
-	protected double increaseSpeedFactor(double speedIncrease) {
+	protected double increasedSpeedFactor(double speedIncrease) {
     return getCurrentSpeed() + speedFactor() * speedIncrease;
 	}
 
 	@Override
-	protected double decreaseSpeedFactor(double speedDecrease) {
+	protected double decreasedSpeedFactor(double speedDecrease) {
     return getCurrentSpeed() - speedFactor() * speedDecrease;
 	}
 

@@ -186,7 +186,7 @@ public class LoadableVehicleTests {
     assertEquals(
       carrier.getPoint(),
       car.getPoint(),
-      "Vil borde inte lastas."
+      "Bil borde inte lastas."
     );
 
     Point2D carrierPos = carrier.getPoint();

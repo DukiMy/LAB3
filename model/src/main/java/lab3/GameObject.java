@@ -11,12 +11,22 @@ import java.util.function.Predicate;
 
 import java.awt.geom.Point2D;
 
+import static java.util.Objects.requireNonNull;
+
+import static org.apache.commons.lang3.Validate.isTrue;
+import static org.apache.commons.lang3.Validate.validState;
+import static org.apache.commons.lang3.Validate.finite;
+
 abstract class GameObject {
   private static final Set<GameObject> gameObjects = new HashSet<>();
-  private final Point2D pos = new Point2D.Double(0.0d, 0.0d);
+  private final Point2D pos;
 
   protected GameObject(double x, double y) {
-    pos.setLocation(x, y);
+    isTrue((x >= 0.0d) && (y >= 0.0d));
+    finite(x);
+    finite(y);
+
+    pos = new Point2D.Double(x, y);
     gameObjects.add(this);
   }
 
@@ -25,10 +35,13 @@ abstract class GameObject {
   public double getY() { return pos.getY(); }
 
   public Point2D getPoint() {
-    return new Point2D.Double( pos.getX(), pos.getY() );
+    return new Point2D.Double(pos.getX(), pos.getY());
   }
 
   public void mutatePoint(double x, double y) {
+    finite(x);
+    finite(y);
+
     pos.setLocation(x, y);
   }
 
@@ -37,11 +50,9 @@ abstract class GameObject {
     double loadRadius,
     Predicate<? super T> allowed) {
 
-    if (loadRadius < 0) {
-      throw new IllegalArgumentException(
-        String.format("Parameter 'loadRadius' = %.2f is negative.", loadRadius)
-      );
-    }
+    requireNonNull(type);
+    isTrue(loadRadius > 1);
+    requireNonNull(allowed);
 
     double maxDistSq = loadRadius * loadRadius;
 
@@ -66,8 +77,14 @@ abstract class GameObject {
   }
 
   public <T extends Vehicle> T getClosestInRange(Class<T> type, double loadRadius) {
+    requireNonNull(type);
+    isTrue(loadRadius > 0);
+
     return getClosestInRange(type, loadRadius, x -> true);
   }
 
-  public void destroy() { gameObjects.remove(this); }
+  public void destroy() {
+    validState(gameObjects.contains(this));
+    gameObjects.remove(this);
+  }
 }

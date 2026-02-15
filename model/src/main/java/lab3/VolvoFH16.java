@@ -95,7 +95,6 @@ public final class VolvoFH16 extends ConditionallyMovableVehicle implements Ramp
     StringBuilder sb = new StringBuilder();
 
     if (cargo.isEmpty()) return sb.append("Cargohold is empty.");
-
     for (Vehicle v : cargo) sb.append(v).append('\n');
 
     return sb;

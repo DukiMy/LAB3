@@ -29,12 +29,12 @@ public final class Volvo240 extends Vehicle implements Car{
 	}
 
   @Override
-	protected double increaseSpeedFactor(double speedIncrease) {
+	protected double increasedSpeedFactor(double speedIncrease) {
     return Math.min(getCurrentSpeed() + speedFactor() * speedIncrease, getEnginePower());
 	}
 
 	@Override
-	protected double decreaseSpeedFactor(double speedDecrease) {
+	protected double decreasedSpeedFactor(double speedDecrease) {
     return Math.max(getCurrentSpeed() - speedFactor() * speedDecrease, 0.0d);
 	}
 

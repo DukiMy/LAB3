@@ -14,10 +14,13 @@
 
 package lab3;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.System.out;
+import static org.apache.commons.lang3.Validate.isTrue;
 
 public final class Garage<T extends Vehicle> extends GameObject {
 
@@ -30,9 +33,8 @@ public final class Garage<T extends Vehicle> extends GameObject {
   public Garage(Class<T> type, double x, double y, int maxCapacity) {
     super(x, y);
 
-    if (1 > maxCapacity || maxCapacity > 127) {
-      throw new IllegalArgumentException("1 > maxCapacity > 127");
-    }
+    requireNonNull(type);
+    isTrue(1 <= maxCapacity && maxCapacity <= 127);
 
     this.type = type;
     this.maxCapacity = maxCapacity;
@@ -55,6 +57,8 @@ public final class Garage<T extends Vehicle> extends GameObject {
   }
 
   public void unLoad(T vehicle) {
+    requireNonNull(vehicle);
+
     if (parkingLot.remove(vehicle)) {
       vehicle.mutatePoint(getX() - 1.0, getY());
     } else {

@@ -7,14 +7,18 @@ package lab3;
 
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
+import static java.util.Objects.requireNonNull;
 
 import java.awt.Color;
+
+import org.apache.commons.lang3.Validate;
 
 import lab3.interfaces.Movable;
 
 abstract class Vehicle extends GameObject implements Movable {
 
-	private int nrDoors;
+  private static final double TURN_RATE = 0.1d;
+	private final int nrDoors;
   private double direction;
 	private double enginePower;
 	private double currentSpeed;
@@ -23,6 +27,15 @@ abstract class Vehicle extends GameObject implements Movable {
 
 	protected Vehicle(int nrDoors, double enginePower, Color color, String modelName, double x, double y) {
     super(x, y);
+
+    Validate.inclusiveBetween(1, 5, nrDoors);
+    Validate.isTrue(enginePower > 0.0d);
+    Validate.finite(enginePower);
+    requireNonNull(color);
+    Validate.notBlank(modelName);
+    Validate.finite(x);
+    Validate.finite(y);
+
     this.direction = 0.0d;
 		this.nrDoors = nrDoors;
 		this.enginePower = enginePower;
@@ -49,23 +62,22 @@ abstract class Vehicle extends GameObject implements Movable {
 
 	public void stopEngine() { setCurrentSpeed(0.0d); }
 
-  public void turnLeft() { direction += 0.1d; }
+  public void turnLeft() { direction += TURN_RATE; }
 
-  public void turnRight() { direction -= 0.1d; }
+  public void turnRight() { direction -= TURN_RATE; }
 
-  private void validateArgInterval(double arg, double lowBound, double highBound) {
-    if (arg < lowBound || arg > highBound) {
-      throw new IllegalArgumentException();
-    }
+  private static final void validate(double lowBound, double highBound, double arg) {
+    Validate.finite(arg);
+    Validate.isTrue(lowBound <= arg && arg <= highBound);
   }
 
   public void brake(double speedDecrease) {
-    validateArgInterval(speedDecrease, 0.0d, 1.0d);
+    validate(0.0d, 1.0d, speedDecrease);
     decreaseSpeed(speedDecrease);
 	}
 
   public void gas(double speedIncrease) {
-    validateArgInterval(speedIncrease, 0.0d, 1.0d);
+    validate(0.0d, 1.0d, speedIncrease);
     increaseSpeed(speedIncrease);
 	}
 
@@ -91,18 +103,18 @@ abstract class Vehicle extends GameObject implements Movable {
 
 	private void increaseSpeed(double speedIncrease) {
 		setCurrentSpeed(
-      increaseSpeedFactor(speedIncrease)
+      increasedSpeedFactor(speedIncrease)
     );
 	}
 
 	private void decreaseSpeed(double speedDecrease) {
 		setCurrentSpeed(
-      decreaseSpeedFactor(speedDecrease)
+      decreasedSpeedFactor(speedDecrease)
     );
 	}
 
-  protected abstract double increaseSpeedFactor(double speedIncrease);
-  protected abstract double decreaseSpeedFactor(double speedDecrease);
+  protected abstract double increasedSpeedFactor(double speedIncrease);
+  protected abstract double decreasedSpeedFactor(double speedDecrease);
   protected abstract String subToString();
 
   @Override
