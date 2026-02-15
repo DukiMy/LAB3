@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 public class GarageTests {
 
+  private static final Point2D.Double ORIGO = new Point2D.Double(0.0d, 0.0d);
   private final List<GameObject> created = new ArrayList<>();
 
   private <T extends GameObject> T track(T obj) {
@@ -29,15 +30,15 @@ public class GarageTests {
   @Test
   void ctorRejectsInvalidCapacity() {
     assertThrows(IllegalArgumentException.class,
-        () -> track(new Garage<>(Vehicle.class, 0, 0, 0)));
+      () -> track(new Garage<>(Vehicle.class, ORIGO, 0)));
 
     assertThrows(IllegalArgumentException.class,
-        () -> track(new Garage<>(Vehicle.class, 0, 0, 128)));
+      () -> track(new Garage<>(Vehicle.class, ORIGO, 128)));
   }
 
   @Test
   void freeSlotsDecreasesWhenLoadedUntilFull() {
-    Garage<Vehicle> g = track(new Garage<>(Vehicle.class, 0, 0, 2));
+    Garage<Vehicle> g = track(new Garage<>(Vehicle.class, ORIGO, 2));
     Vehicle v1 = track(new Volvo240());
     Vehicle v2 = track(new Saab95());
     Vehicle v3 = track(new Scania());
@@ -66,7 +67,7 @@ public class GarageTests {
 
   @Test
   void loadsClosestVehicleInRange() {
-    Garage<Vehicle> g = track(new Garage<>(Vehicle.class, 0, 0, 5));
+    Garage<Vehicle> g = track(new Garage<>(Vehicle.class, ORIGO, 5));
     Vehicle near = track(new Volvo240());
     Vehicle far  = track(new Saab95());
 
@@ -90,7 +91,7 @@ public class GarageTests {
 
   @Test
   void doesNotLoadOutOfRange() {
-    Garage<Vehicle> g = track(new Garage<>(Vehicle.class, 0, 0, 5));
+    Garage<Vehicle> g = track(new Garage<>(Vehicle.class, ORIGO, 5));
     Vehicle outOfRange = track(new Volvo240());
 
     outOfRange.mutatePoint(100.0, 100.0);
@@ -113,7 +114,7 @@ public class GarageTests {
 
   @Test
   void doesNotLoadSameVehicleTwice() {
-    Garage<Vehicle> g = track(new Garage<>(Vehicle.class, 0, 0, 2));
+    Garage<Vehicle> g = track(new Garage<>(Vehicle.class, ORIGO, 2));
     Vehicle v = track(new Saab95());
     v.mutatePoint(0.1, 0.1);
 
@@ -131,7 +132,7 @@ public class GarageTests {
 
   @Test
   void unloadMovesVehicleToLeftOfGarage() {
-    Garage<Vehicle> g = track(new Garage<>(Vehicle.class, 10.0, 20.0, 2));
+    Garage<Vehicle> g = track(new Garage<>(Vehicle.class, new Point2D.Double(10.0d, 20.0d), 2));
     Vehicle v = track(new Volvo240());
     v.mutatePoint(10.1, 20.1);
 
@@ -151,7 +152,7 @@ public class GarageTests {
 
   @Test
   void unloadOfVehicleNotInGarageDoesNothing() {
-    Garage<Vehicle> g = track(new Garage<>(Vehicle.class, 0.0, 0.0, 2));
+    Garage<Vehicle> g = track(new Garage<>(Vehicle.class, ORIGO, 2));
     Vehicle v = track(new Volvo240());
     v.mutatePoint(3.0, 3.0);
 
@@ -173,7 +174,7 @@ public class GarageTests {
 
   @Test
   void typeFilterLoadsOnlyVehiclesOfT() {
-    Garage<Saab95> saabGarage = track(new Garage<>(Saab95.class, 0, 0, 2));
+    Garage<Saab95> saabGarage = track(new Garage<>(Saab95.class, ORIGO, 2));
 
     Saab95 saab = track(new Saab95());
     Volvo240 volvo = track(new Volvo240());

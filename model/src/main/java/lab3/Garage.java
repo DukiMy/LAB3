@@ -14,6 +14,7 @@
 
 package lab3;
 
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,10 +36,9 @@ public final class Garage<T extends Vehicle> extends GameObject {
 
   public Garage(
     final Class<T> type,
-    final double x,
-    final double y,
+    final Point2D point,
     final int maxCapacity) {
-    super(x, y);
+    super(point);
 
     requireNonNull(type);
     isTrue(1 <= maxCapacity && maxCapacity <= 127);

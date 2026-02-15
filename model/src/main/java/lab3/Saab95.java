@@ -4,13 +4,16 @@
  */
 
 package lab3;
-import static java.awt.Color.RED;
 
 import lab3.interfaces.Car;
 import lab3.interfaces.TurboChargable;
 
+import java.awt.geom.Point2D;
+import static java.awt.Color.RED;
+
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import static org.apache.commons.lang3.builder.ToStringStyle.MULTI_LINE_STYLE;
+
 
 public final class Saab95 extends Vehicle implements Car, TurboChargable{
 
@@ -22,8 +25,7 @@ public final class Saab95 extends Vehicle implements Car, TurboChargable{
       /* Engine power    */ 125.0d,
       /* Vehicle Color   */ RED,
       /* Vehicle model   */ "Saab95",
-      /* X position      */ 0.0d,
-      /* Y position      */ 0.0d
+      /* Point           */ new Point2D.Double(0.0d, 0.0d)
     );
 
     turboOn = false;

@@ -5,15 +5,19 @@
 
 package lab3;
 
+import lab3.interfaces.Movable;
+
+import java.awt.Color;
+import java.awt.geom.Point2D;
+
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import static java.util.Objects.requireNonNull;
 
-import java.awt.Color;
-
-import org.apache.commons.lang3.Validate;
-
-import lab3.interfaces.Movable;
+import static org.apache.commons.lang3.Validate.inclusiveBetween;
+import static org.apache.commons.lang3.Validate.isTrue;
+import static org.apache.commons.lang3.Validate.finite;
+import static org.apache.commons.lang3.Validate.notBlank;
 
 abstract class Vehicle extends GameObject implements Movable {
 
@@ -30,17 +34,16 @@ abstract class Vehicle extends GameObject implements Movable {
     final double enginePower,
     final Color color,
     final String modelName,
-    final double x,
-    final double y) {
-    super(x, y);
+    final Point2D point) {
+    super(point);
 
-    Validate.inclusiveBetween(1, 5, nrDoors);
-    Validate.isTrue(enginePower > 0.0d);
-    Validate.finite(enginePower);
+    inclusiveBetween(1, 5, nrDoors);
+    isTrue(enginePower > 0.0d);
+    finite(enginePower);
     requireNonNull(color);
-    Validate.notBlank(modelName);
-    Validate.finite(x);
-    Validate.finite(y);
+    notBlank(modelName);
+    finite(point.getX());
+    finite(point.getY());
 
     this.direction = 0.0d;
 		this.nrDoors = nrDoors;
@@ -77,8 +80,8 @@ abstract class Vehicle extends GameObject implements Movable {
     final double highBound,
     final double arg) {
 
-    Validate.finite(arg);
-    Validate.isTrue(lowBound <= arg && arg <= highBound);
+    finite(arg);
+    isTrue(lowBound <= arg && arg <= highBound);
   }
 
   public void brake(final double speedDecrease) {

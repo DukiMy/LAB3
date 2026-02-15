@@ -21,7 +21,9 @@ abstract class GameObject {
   private static final Set<GameObject> gameObjects = new HashSet<>();
   private final Point2D pos;
 
-  protected GameObject(final double x, final double y) {
+  protected GameObject(Point2D point) {
+    Double x = point.getX();
+    Double y = point.getY();
     isTrue((x >= 0.0d) && (y >= 0.0d));
     finite(x);
     finite(y);

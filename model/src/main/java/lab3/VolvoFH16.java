@@ -5,14 +5,16 @@
 
 package lab3;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-
 import lab3.interfaces.Car;
 import lab3.interfaces.RampOperated;
 
-import static java.awt.Color.YELLOW;
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 import static java.lang.System.out;
+
+import java.awt.geom.Point2D;
+import static java.awt.Color.YELLOW;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import static org.apache.commons.lang3.builder.ToStringStyle.MULTI_LINE_STYLE;
@@ -31,8 +33,7 @@ public final class VolvoFH16 extends ConditionallyMovableVehicle implements Ramp
       /* Engine power    */ 200.0d,
       /* Vehicle color   */ YELLOW,
       /* Vehicle model   */ "VolvoFH16",
-      /* X position      */ 0.0d,
-      /* Y position      */ 0.0d
+      /* X position      */ new Point2D.Double(0.0d, 0.0d)
     );
 
     raiseRamp();

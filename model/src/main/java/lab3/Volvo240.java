@@ -9,8 +9,11 @@ import static java.awt.Color.BLACK;
 
 import lab3.interfaces.Car;
 
+import java.awt.geom.Point2D;
+
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import static org.apache.commons.lang3.builder.ToStringStyle.MULTI_LINE_STYLE;
+
 
 public final class Volvo240 extends Vehicle implements Car{
 
@@ -22,8 +25,7 @@ public final class Volvo240 extends Vehicle implements Car{
       /* Engine power    */ 100.0d,
       /* Vehicle color   */ BLACK,
       /* vehicle model   */ "Volvo240",
-      /* X position      */ 0.0d,
-      /* Y position      */ 0.0d
+      /* Point           */ new Point2D.Double(0.0d, 0.0d)
      );
 	}
 

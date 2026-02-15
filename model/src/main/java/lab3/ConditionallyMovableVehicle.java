@@ -6,6 +6,7 @@
 package lab3;
 
 import java.awt.Color;
+import java.awt.geom.Point2D;
 
 import static org.apache.commons.lang3.Validate.isTrue;
 import static org.apache.commons.lang3.Validate.finite;
@@ -17,9 +18,8 @@ abstract class ConditionallyMovableVehicle extends Vehicle {
     final double enginePower,
     final Color color,
     final String modelName,
-    final double x,
-    final double y
-  ) { super(nrDoors, enginePower, color, modelName, x, y); }
+    final Point2D point
+  ) { super(nrDoors, enginePower, color, modelName, point); }
 
   protected abstract boolean canMove();
 

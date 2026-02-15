@@ -5,14 +5,18 @@
 
 package lab3;
 
+import lab3.interfaces.Tippable;
+
+import java.awt.geom.Point2D;
 import static java.awt.Color.BLUE;
-import static org.apache.commons.lang3.Validate.isTrue;
-import static org.apache.commons.lang3.Validate.validState;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import static org.apache.commons.lang3.builder.ToStringStyle.MULTI_LINE_STYLE;
 
-import lab3.interfaces.Tippable;
+import static org.apache.commons.lang3.Validate.isTrue;
+import static org.apache.commons.lang3.Validate.validState;
+
+
 
 public final class Scania extends ConditionallyMovableVehicle implements Tippable {
   private byte tipBedAngle = 0;
@@ -23,8 +27,7 @@ public final class Scania extends ConditionallyMovableVehicle implements Tippabl
       /* Engine power    */ 200.0d,
       /* Vehicle color   */ BLUE,
       /* Vehicle model   */ "Scania",
-      /* X position      */ 0.0d,
-      /* Y position      */ 0.0d
+      /* X position      */ new Point2D.Double(0.0d, 0.0d)
      );
 
     tipBedAngle = 0;
