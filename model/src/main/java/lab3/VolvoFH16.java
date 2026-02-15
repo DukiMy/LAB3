@@ -14,6 +14,10 @@ import lab3.interfaces.RampOperated;
 import static java.awt.Color.YELLOW;
 import static java.lang.System.out;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import static org.apache.commons.lang3.builder.ToStringStyle.MULTI_LINE_STYLE;
+
+
 public final class VolvoFH16 extends ConditionallyMovableVehicle implements RampOperated {
 
   private static final double LOAD_RADIUS = 5.0d;
@@ -116,12 +120,7 @@ public final class VolvoFH16 extends ConditionallyMovableVehicle implements Ramp
   protected boolean canMove() { return !isRampLowered; }
 
   @Override
-  protected String subToString() {
-    StringBuilder sb = new StringBuilder();
-
-    sb.append(", \n\tisRampLowered = " + isRampLowered)
-      .append("\n\t" + loadToString());
-
-    return sb.toString();
+  public String toString() {
+    return ReflectionToStringBuilder.toString(this, MULTI_LINE_STYLE);
   }
 }

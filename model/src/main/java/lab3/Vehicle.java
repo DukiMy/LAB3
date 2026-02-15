@@ -115,18 +115,4 @@ abstract class Vehicle extends GameObject implements Movable {
 
   protected abstract double increasedSpeedFactor(double speedIncrease);
   protected abstract double decreasedSpeedFactor(double speedDecrease);
-  protected abstract String subToString();
-
-  @Override
-  public String toString() {
-    return "Vehicle{" +
-          " \n\tmodelName = \"" + modelName + '\"' +
-          ", \n\trDoors = " + nrDoors +
-          ", \n\tenginePower = " + enginePower +
-          ", \n\tcurrentSpeed = " + currentSpeed +
-          ", \n\tdirection = " + direction +
-          ", \n\tpos = (" + getX() + ", " + getY() + ")" +
-          ", \n\tcolor = #" + String.format("%06X", color.getRGB() & 0x00FFFFFF) + subToString() +
-          "\n}";
-  }
 }

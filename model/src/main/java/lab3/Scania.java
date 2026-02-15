@@ -4,9 +4,13 @@
  */
 
 package lab3;
+
 import static java.awt.Color.BLUE;
 import static org.apache.commons.lang3.Validate.isTrue;
 import static org.apache.commons.lang3.Validate.validState;
+
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import static org.apache.commons.lang3.builder.ToStringStyle.MULTI_LINE_STYLE;
 
 import lab3.interfaces.Tippable;
 
@@ -44,11 +48,7 @@ public final class Scania extends ConditionallyMovableVehicle implements Tippabl
   protected double speedFactor() { return getEnginePower() * 0.01d; }
 
   @Override
-  protected String subToString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append(", \n\ttipBedAngle = " + tipBedAngle + '°')
-      .append(", \n\tcanMove = " + canMove());
-
-    return sb.toString();
+  public String toString() {
+    return ReflectionToStringBuilder.toString(this, MULTI_LINE_STYLE);
   }
 }

@@ -9,6 +9,9 @@ import static java.awt.Color.RED;
 import lab3.interfaces.Car;
 import lab3.interfaces.TurboChargable;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import static org.apache.commons.lang3.builder.ToStringStyle.MULTI_LINE_STYLE;
+
 public final class Saab95 extends Vehicle implements Car, TurboChargable{
 
 	private boolean turboOn;
@@ -43,7 +46,7 @@ public final class Saab95 extends Vehicle implements Car, TurboChargable{
 	}
 
   @Override
-  protected String subToString() {
-    return ", \n\tturboOn = " + turboOn;
+  public String toString() {
+    return ReflectionToStringBuilder.toString(this, MULTI_LINE_STYLE);
   }
 }

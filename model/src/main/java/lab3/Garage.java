@@ -14,13 +14,16 @@
 
 package lab3;
 
-import static java.util.Objects.requireNonNull;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Objects.requireNonNull;
+
 import static java.lang.System.out;
 import static org.apache.commons.lang3.Validate.isTrue;
+
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import static org.apache.commons.lang3.builder.ToStringStyle.MULTI_LINE_STYLE;
 
 public final class Garage<T extends Vehicle> extends GameObject {
 
@@ -73,5 +76,10 @@ public final class Garage<T extends Vehicle> extends GameObject {
     if (sb.length() == 0) sb.append("Parkinglot is empty.");
 
     out.println(sb);
+  }
+
+  @Override
+  public String toString() {
+    return ReflectionToStringBuilder.toString(this, MULTI_LINE_STYLE);
   }
 }

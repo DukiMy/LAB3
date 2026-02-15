@@ -9,6 +9,9 @@ import static java.awt.Color.BLACK;
 
 import lab3.interfaces.Car;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import static org.apache.commons.lang3.builder.ToStringStyle.MULTI_LINE_STYLE;
+
 public final class Volvo240 extends Vehicle implements Car{
 
 	private static final double TRIM_FACTOR = 1.25d;
@@ -39,5 +42,7 @@ public final class Volvo240 extends Vehicle implements Car{
 	}
 
   @Override
-  protected String subToString() { return ", \n\tTRIM_FACTOR = " + TRIM_FACTOR; }
+  public String toString() {
+    return ReflectionToStringBuilder.toString(this, MULTI_LINE_STYLE);
+  }
 }
