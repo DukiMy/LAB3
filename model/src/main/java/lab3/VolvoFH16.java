@@ -95,16 +95,13 @@ public final class VolvoFH16 extends ConditionallyMovableVehicle implements Ramp
     v.mutatePoint(getX() - 1.0, getY());
   }
 
-  private StringBuilder loadToString() {
+  public void printLoad() {
     StringBuilder sb = new StringBuilder();
 
-    if (cargo.isEmpty()) return sb.append("Cargohold is empty.");
+    if (cargo.isEmpty()) sb.append("Cargohold is empty.");
     for (Vehicle v : cargo) sb.append(v).append('\n');
-
-    return sb;
+    out.println(sb);
   }
-
-  public void printLoad() { out.println(loadToString()); }
 
 	protected double speedFactor() { return getEnginePower() * 0.01d; }
 
