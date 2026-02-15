@@ -17,7 +17,7 @@ import static org.apache.commons.lang3.Validate.isTrue;
 import static org.apache.commons.lang3.Validate.validState;
 import static org.apache.commons.lang3.Validate.finite;
 
-abstract class GameObject {
+public abstract class GameObject {
   private static final Set<GameObject> gameObjects = new HashSet<>();
   private final Point2D pos;
 

@@ -19,7 +19,7 @@ import static org.apache.commons.lang3.Validate.isTrue;
 import static org.apache.commons.lang3.Validate.finite;
 import static org.apache.commons.lang3.Validate.notBlank;
 
-abstract class Vehicle extends GameObject implements Movable {
+public abstract class Vehicle extends GameObject implements Movable {
 
   private static final double TURN_RATE = 0.1d;
 	private final int nrDoors;

@@ -1,6 +1,6 @@
 package lab3.interfaces;
 
-public interface Car {
+public interface Car extends Movable {
 
   /*
       There are no methods that separate Car behavior from Vehicle behaviour.
