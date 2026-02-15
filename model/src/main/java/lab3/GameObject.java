@@ -60,7 +60,7 @@ abstract class GameObject {
     double bestD2 = Double.POSITIVE_INFINITY;
 
     for (GameObject other : gameObjects) {
-      if (other == this) continue;
+      if (other.equals(this)) continue;
       if (!type.isInstance(other)) continue;
 
       T candidate = type.cast(other);
@@ -74,13 +74,6 @@ abstract class GameObject {
     }
 
     return best;
-  }
-
-  public <T extends Vehicle> T getClosestInRange(Class<T> type, double loadRadius) {
-    requireNonNull(type);
-    isTrue(loadRadius > 0);
-
-    return getClosestInRange(type, loadRadius, x -> true);
   }
 
   public void destroy() {
