@@ -47,8 +47,19 @@
     <surefire.version>3.2.5</surefire.version>
     <jacoco.version>0.8.14</jacoco.version>
     <commons-lang3.version>3.17.0</commons-lang3.version>
-
+    <exec-maven-plugin.version>3.6.1</exec-maven-plugin.version>
   </properties>
+
+  <profiles>
+    <profile>
+      <id>run-ui</id>
+      <modules>
+        <module>model</module>
+        <module>ui</module>
+      </modules>
+    </profile>
+  </profiles>
+
 
   <!-- Centralt versionsstyre för beroenden (moduler väljer själva vad de använder) -->
   <dependencyManagement>
@@ -78,6 +89,18 @@
 
   <!-- Centralt versionsstyre för plugins (moduler väljer själva vilka de aktiverar) -->
   <build>
+
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>${exec-maven-plugin.version}</version>
+        <configuration>
+          <skip>true</skip>
+        </configuration>
+      </plugin>
+    </plugins>
+
     <pluginManagement>
       <plugins>
 
@@ -94,6 +117,12 @@
             <release>${maven.compiler.release}</release>
             <encoding>${project.build.sourceEncoding}</encoding>
           </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>exec-maven-plugin</artifactId>
+          <version>${exec-maven-plugin.version}</version>
         </plugin>
 
           <!--
