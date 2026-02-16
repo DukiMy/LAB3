@@ -1,6 +1,12 @@
 # oopd-gu-chalmers Lab 3
 Lab assignment 3 in the course Object-oriented Programming and Design, GU/Chalmers
 
+## Instruktioner för byggning
+Från root-katalogen, skriv följande kommando.
+```
+mvn compile
+```
+
 ## Instruktioner för körning
 Från root-katalogen, skriv följande kommando.
 ```
