@@ -1,7 +1,13 @@
 # oopd-gu-chalmers Lab 3
 Lab assignment 3 in the course Object-oriented Programming and Design, GU/Chalmers
 
-## Instruktioner för testning.
+## Instruktioner för körning
+Från root-katalogen, skriv följande kommando.
+```
+mvn -pl :ui -am -Prun-ui validate
+```
+
+## Instruktioner för testning
 Från root-katalogen, skriv följande kommando.
 ```
 mvn clean verify
