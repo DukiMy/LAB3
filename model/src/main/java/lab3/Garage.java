@@ -51,16 +51,20 @@ public final class Garage<T extends Vehicle> extends GameObject {
     return maxCapacity - parkingLot.size();
   }
 
-  public void load() {
+  public boolean load() {
     if (getFreeSlots() <= 0) {
       out.println("The garage is full!");
-      return;
+      return false;
     }
+
     T v = getClosestInRange(type, LOAD_RADIUS, x -> !parkingLot.contains(x));
-    if (v == null) return;
+    if (v == null) {
+      return false;
+    }
 
     parkingLot.add(v);
     v.mutatePoint(getX(), getY());
+    return true;
   }
 
   public void unLoad(final T vehicle) {

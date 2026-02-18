@@ -42,7 +42,7 @@ public final class Scania extends ConditionallyMovableVehicle implements Tippabl
     tipBedAngle = angle;
   }
 
-  public double getTipBedAngle() { return tipBedAngle; }
+  public byte getTipBedAngle() { return tipBedAngle; }
 
   @Override
   public boolean canMove() { return tipBedAngle == 0; }

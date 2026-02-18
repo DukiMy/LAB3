@@ -126,6 +126,13 @@ public abstract class Vehicle extends GameObject implements Movable {
     );
 	}
 
+  public void invertDirection() {
+  direction = direction + Math.PI;
+  direction = direction % (2.0d * Math.PI);
+  if (direction < 0.0d) direction += 2.0d * Math.PI;
+}
+
+
   protected abstract double increasedSpeedFactor(final double speedIncrease);
   protected abstract double decreasedSpeedFactor(final double speedDecrease);
 }

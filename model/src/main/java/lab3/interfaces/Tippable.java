@@ -10,5 +10,5 @@ package lab3.interfaces;
 public interface Tippable extends Movable{
 
   void setTipBedAngle(byte angle);
-  double getTipBedAngle();
+  byte getTipBedAngle();
 }
